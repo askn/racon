@@ -2,6 +2,7 @@
 /libs/
 /.crystal/
 /.shards/
+/public/css
 
 
 # Libraries don't need dependency lock

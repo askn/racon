@@ -5,3 +5,14 @@ authors:
   - Aşkın Gedik <askn@bil.omu.edu.tr>
 
 license: MIT
+
+dependencies:
+  kemal:
+    github: sdogruyol/kemal
+    branch: master
+  pg:
+    github: will/crystal-pg
+    branch: master
+  pool:
+    github: ysbaddaden/pool
+    branch: master
