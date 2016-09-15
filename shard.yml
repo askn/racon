@@ -12,7 +12,10 @@ dependencies:
     branch: master
   pg:
     github: will/crystal-pg
-    branch: master
+    version: ~> 0.9.1
   pool:
     github: ysbaddaden/pool
+    branch: master
+  baked_file_system:
+    github: schovi/baked_file_system
     branch: master

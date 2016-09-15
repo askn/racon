@@ -1,0 +1,17 @@
+<div>
+    <table class="table table-striped">
+        <% _data = data.not_nil! %>
+        <tbody>
+            <% resource.show_page_attributes.not_nil!.each do |field| %>
+            <tr>
+                <th>
+                    <%= field %>
+                </th>
+                <td>
+                    <%= _data[field] %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

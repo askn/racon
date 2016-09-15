@@ -2,8 +2,7 @@ var gulp = require('gulp');
 var $    = require('gulp-load-plugins')();
 
 var sassPaths = [
-	'node_modules/foundation-sites/scss',
-	'node_modules/motion-ui/src'
+	'node_modules/bootstrap-sass/assets/stylesheets'
 ];
 
 gulp.task('sass', function() {

@@ -1,2 +1,75 @@
+<div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <% resource.index_page_attributes.not_nil!.each do |field_name| %>
+                    <th>
+                        <%= field_name %>
+                    </th>
+                    <% end %>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.not_nil!.each do |row| %>
+                <tr>
+                    <% resource.index_page_attributes.not_nil!.each do |field_name| %>
+                    <td>
+                        <% if field_name == "id" %>
+                        <a href="/<%= resource.table_name %>/<%= row[field_name] %>"><%= row[field_name] %></a>
+                    <% else %>
+                        <%= Helper.index_render_field(resource, field_name, row[field_name]) %>
+                        <% end %>
+                    </td>
+                    <% end %>
+                    <td>
+                        <a class="text-primary" href="/<%= resource.table_name %>/<%= row["id"] %>/edit">Edit</a>
+                    </td>
+                    <td>
+                        <a class="text-danger" data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/<%= resource.table_name %>/<%= row["id"] %>">Destroy</a>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
 
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <% unless num == pagination[:first] %>
+            <li class="previous">
+                <a href="/<%= resource.table_name %>?page=<%= pagination[:first] %>">
+                    <span aria-hidden="true">&larr;</span>
+                    First Page</a>
+            </li>
+            <% end %>
+            <% pagination[:pages].each do |page_number| %>
+            <li <%= page_number==num ? "class='active'" : "" %>>
+                <a href="/<%= resource.table_name %>?page=<%= page_number %>"><%= page_number %></a>
+            </li>
+            <% end %>
+            <% unless num == pagination[:last] %>
+            <li class="next">
+                <a href="/<%= resource.table_name %>?page=<%= pagination[:last] %>">Last Page
+                    <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+            <% end %>
+        </ul>
+    </nav>
 
+</div>
+
+<% content_for "javascript" do %>
+<script type="text/javascript">
+    $("[data-method]").click(function (e) {
+        e.preventDefault()
+        if (!confirm($(this).data('confirm')))
+            return
+        var url = $(this).attr('href');
+        var form = "\n<form action='" + url + "' method='POST' style='display:none'>\n	<input type='hidden' name='_method' value='" + $(this).data('method') + "'>\n</form>\n";
+        $(form).submit();
+    })
+</script>
+<% end %>
